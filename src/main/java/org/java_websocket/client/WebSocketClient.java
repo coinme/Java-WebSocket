@@ -226,7 +226,7 @@ public abstract class WebSocketClient extends WebSocketAdapter implements Runnab
 		ByteBuffer buff = ByteBuffer.allocate( WebSocketImpl.RCVBUF );
 		try/*IO*/{
 			while ( channel.isOpen() ) {
-				if( SocketChannelIOHelper.read( buff, this.conn, wrappedchannel ) ) {
+				if( SocketChannelIOHelper.read( buff, wrappedchannel ) ) {
 					conn.decode( buff );
 				} else {
 					conn.eot();

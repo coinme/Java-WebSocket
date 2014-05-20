@@ -7,15 +7,15 @@ import java.nio.channels.spi.AbstractSelectableChannel;
 
 public class SocketChannelIOHelper {
 
-	public static boolean read( final ByteBuffer buf, WebSocketImpl ws, ByteChannel channel ) throws IOException {
+	public static boolean read( final ByteBuffer buf, ByteChannel channel ) throws IOException {
 		buf.clear();
 		int read = channel.read( buf );
 		buf.flip();
 
 		if( read == -1 ) {
-			ws.eot();
 			return false;
 		}
+
 		return read != 0;
 	}
 

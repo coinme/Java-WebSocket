@@ -324,7 +324,7 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 							conn = (WebSocketImpl) key.attachment();
 							ByteBuffer buf = takeBuffer();
 							try {
-								if( SocketChannelIOHelper.read( buf, conn, (ByteChannel) conn.channel ) ) {
+								if( SocketChannelIOHelper.read( buf, (ByteChannel) conn.channel ) ) {
 									conn.inQueue.put( buf );
 									queue( conn );
 									i.remove();
@@ -334,6 +334,7 @@ public abstract class WebSocketServer extends WebSocketAdapter implements Runnab
 										}
 									}
 								} else {
+                                    conn.eot();
 									pushBuffer( buf );
 								}
 							} catch ( IOException e ) {
